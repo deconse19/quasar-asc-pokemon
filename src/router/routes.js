@@ -1,9 +1,17 @@
+import ItemPage from 'src/pages/ItemPage.vue'
+import ItemsPage from 'src/pages/ItemsPage.vue'
+
+
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: 'items', component: ItemPage  },
+      // { path: 'practice', component: ItemsPage  }
+
+
     ]
   },
 
