@@ -9,11 +9,23 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'items', component: ItemPage  },
-      // { path: 'practice', component: ItemsPage  }
+      { path: '/signup', component: () => import('pages/SignUpPage.vue') },
+   
 
 
     ]
   },
+  // {
+  //   path: '/',
+  //   component: () => import('layouts/IndexPage.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/IndexPage.vue') },
+  //     { path: 'items', component: ItemPage  },
+  //     // { path: 'practice', component: ItemsPage  }
+
+
+  //   ]
+  // },
 
   // Always leave this as last one,
   // but you can also remove it

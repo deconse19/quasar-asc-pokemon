@@ -5,9 +5,9 @@
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="src/assets/poke.png">
+            <img src="src/assets/Poke_Ball.webp">
           </q-avatar>
-          Pukemon
+          <span class="text-white"> I dont know </span>
         </q-toolbar-title>
 
         <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
