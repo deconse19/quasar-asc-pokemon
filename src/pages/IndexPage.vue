@@ -6,13 +6,13 @@
           <div class="text-h4 q-pa-md ">Login muna Bossing</div>
           <div>Please Login to Continue</div>
           <div class="column">
-            <q-input outlined label="Enter username *" v-model="form.email.value" :error="form.email.error"
-              :error-message="form.email.msg">
+            <q-input required="true" outlined label="Enter username *" v-model="form.username.value" :error="form.username.error"
+              :error-message="form.username.msg">
               <template v-slot:prepend>
                 <q-icon name="email"></q-icon>
               </template>
             </q-input>
-            <q-input class="q-mt-sm" outlined label="Enter password *" v-model="form.password.value"
+            <q-input type="password" class="q-mt-sm" outlined label="Enter password *" v-model="form.password.value"
               :error="form.password.error" :error-message="form.password.msg">
               <template v-slot:prepend>
                 <q-icon name="lock "></q-icon>
@@ -22,11 +22,11 @@
               </template>
             </q-input>
           </div>
-          <div class="row q-mt-sm">
-            <q-btn class="row q-mr-sm" @click="goToSignup" color="grey-3" no-shadow>
+          <div class="row q-mt-sm justify-center">
+            <q-btn class="row q-mr-sm text-black" @click="goToSignup" color="grey-3" no-shadow>
               Sign Up
             </q-btn>
-            <q-btn glossy color="deep-orange" @click="submitLogin">
+            <q-btn glossy color="grey" @click="submitLogin">
               Login
             </q-btn>
           </div>
@@ -46,10 +46,9 @@ export default {
   data() {
     return {
       form: {
-        email: {
+        username: {
           value: '',
           required: true,
-          email: true
         },
         password: {
           value: '',

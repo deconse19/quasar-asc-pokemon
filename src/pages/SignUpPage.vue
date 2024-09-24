@@ -1,23 +1,33 @@
 <template>
   <div class="bg">
     <q-page class="flex flex-center">
-      <q-form @submit="onSubmit" class="column q-gutter-md text-white" ref="signupForm">
+      <q-card flat bordered class="signUp q-pa-md" v-bind:style="{ opacity: 0.7 }">
 
-        <q-input v-model="form.userName" required="true" label="Username" filled />
-        <q-input v-model="form.firstName" required="true" label="First Name" filled />
-        <q-input v-model="form.middleName" required="true" label="Middle Name" filled />
-        <q-input v-model="form.lastName" required="true" label="Last Name" filled />
-        <q-input v-model="form.email" required="true" label="Email" type="email" filled />
-        <q-input v-model="form.password" required="true" label="Password" type="password" filled />
+        <q-card-section>
+          <div class="text-black text-h2">SignUp</div>
+        </q-card-section>
+        <q-card-section>
+          <q-form @submit="onSubmit" class="column q-gutter-sm text-white" ref="signupForm">
 
-        <q-btn label="Sign Up" type="submit" color="primary" />
+            <q-input v-model="form.userName" required="true" label="Username" filled />
+            <q-input v-model="form.firstName" required="true" label="First Name" filled />
+            <q-input v-model="form.middleName" required="true" label="Middle Name" filled />
+            <q-input v-model="form.lastName" required="true" label="Last Name" filled />
+            <q-input v-model="form.email" required="true" label="Email" type="email" filled />
+            <q-input v-model="form.password" required="true" label="Password" type="password" filled />
 
-        <!-- Show error message if any -->
-        <q-banner v-if="errorMessage" type="negative" class="q-mt-md">
-          {{ errorMessage }}
-        </q-banner>
+            <q-btn label="Sign Up" type="submit" color="primary" />
 
-      </q-form>
+            <!-- Show error message if any -->
+            <q-banner v-if="errorMessage" type="negative" class="q-mt-md">
+              {{ errorMessage }}
+            </q-banner>
+
+          </q-form>
+        </q-card-section>
+
+      </q-card>
+
     </q-page>
   </div>
 
@@ -61,5 +71,10 @@ export default {
   background-size: cover;
   background-position: center;
   height: 100vh;
+}
+
+.signUp {
+
+  width: 30%
 }
 </style>
