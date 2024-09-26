@@ -1,21 +1,10 @@
 <template>
   <q-page padding>
     <!-- Table for displaying items -->
-    <q-table
-      :rows="items"
-      :columns="columns"
-      row-key="id"
-      title="Items"
-      separator="horizontal"
-    >
+    <q-table :rows="items" :columns="columns" row-key="id" title="Items" separator="horizontal">
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn
-            icon="edit"
-            color="primary"
-            @click="openEditItemDialog(props.row)"
-            flat
-          />
+          <q-btn icon="edit" color="primary" @click="openEditItemDialog(props.row)" flat />
         </q-td>
       </template>
     </q-table>
@@ -31,20 +20,9 @@
         </q-card-section>
 
         <q-card-section>
-          <q-input
-            v-model="itemForm.name"
-            label="Item Name"
-            outlined
-            :rules="[val => !!val || 'Name is required']"
-          />
-          <q-input
-            v-model="itemForm.description"
-            label="Description"
-            outlined
-            type="textarea"
-            :rules="[val => !!val || 'Description is required']"
-            style="margin-top: 1rem;"
-          />
+          <q-input v-model="itemForm.name" label="Item Name" outlined :rules="[val => !!val || 'Name is required']" />
+          <q-input v-model="itemForm.description" label="Description" outlined type="textarea"
+            :rules="[val => !!val || 'Description is required']" style="margin-top: 1rem;" />
         </q-card-section>
 
         <q-card-actions align="right">
@@ -69,7 +47,7 @@ export default {
         name: '',
         description: ''
       },
-        isEditMode: false, // Indicates if in edit mode
+      isEditMode: false, // Indicates if in edit mode
       columns: [ // Table columns
         { name: 'id', label: 'ID', align: 'left', field: 'id' },
         { name: 'name', label: 'Name', align: 'left', field: 'name' },

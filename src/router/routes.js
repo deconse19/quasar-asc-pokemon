@@ -1,32 +1,24 @@
-import ItemPage from 'src/pages/ItemPage.vue'
-import ItemsPage from 'src/pages/ItemsPage.vue'
-
-
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    path: '/home',
+    component: () => import('layouts/MainLayout.vue'), // Main layout for most pages
     children: [
-      { path: '/', component: () => import('pages/IndexPage.vue') },
-      { path: '/items', component: ItemPage  },
-      { path: '/signup', component: () => import('pages/SignUpPage.vue') },
-   
-
-
+      { path: '', component: () => import('pages/HomePage.vue') },
+      { path: '/items', component: () => import('pages/ItemPage.vue') }, // other pages under MainLayout
+       // other pages under MainLayout
     ]
   },
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/IndexPage.vue'),
-  //   children: [
-  //     { path: '', component: () => import('pages/IndexPage.vue') },
-  //     { path: 'items', component: ItemPage  },
-  //     // { path: 'practice', component: ItemsPage  }
-
-
-  //   ]
-  // },
-
+  
+  // Pages without MainLayout (e.g., login, signup)
+  {
+    path: '/',
+    component: () => import('src/pages/LoginPage.vue') // No MainLayout applied here
+  },
+  {
+    path: '/signup',
+    component: () => import('pages/SignUpPage.vue') // No MainLayout applied here
+  },
+  
   // Always leave this as last one,
   // but you can also remove it
   {

@@ -1,25 +1,28 @@
 <template>
   <q-layout view="hHh lpr fFf">
 
-    <q-header reveal class="bg-primary text-white" height-hint="98">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
         <q-toolbar-title>
           <q-avatar>
             <img src="src/assets/Poke_Ball.webp">
           </q-avatar>
-          <span class="text-white"> I dont know </span>
+          I dont know
         </q-toolbar-title>
 
-        <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
+        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-
-      <q-tabs align="left">
-        <!-- <q-route-tab to="/items" label="Item" /> -->
-        <!-- <q-route-tab to="/practice" label="practice" /> -->
-        <!-- <q-route-tab to="/page3" label="Page Three" /> -->
-      </q-tabs>
     </q-header>
 
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+      <!-- drawer content -->
+    </q-drawer>
+
+    <q-drawer v-model="rightDrawerOpen" side="right" overlay bordered>
+      <!-- drawer content -->
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -33,9 +36,19 @@ import { ref } from 'vue'
 
 export default {
   setup () {
+    const leftDrawerOpen = ref(false)
+    const rightDrawerOpen = ref(false)
 
     return {
-    
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+
+      rightDrawerOpen,
+      toggleRightDrawer () {
+        rightDrawerOpen.value = !rightDrawerOpen.value
+      }
     }
   }
 }
