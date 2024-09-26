@@ -19,13 +19,12 @@
                 <q-icon name="lock"></q-icon>
               </template>
               <template v-slot:append>
-                <q-icon :name="isPasswordVisible ? 'visibility' : 'visibility_off'" 
-                        @click="togglePasswordVisibility"
-                        :color="isPasswordVisible ? 'primary' : 'grey'" />
+                <q-icon :name="isPasswordVisible ? 'visibility' : 'visibility_off'" @click="togglePasswordVisibility"
+                  :color="isPasswordVisible ? 'primary' : 'grey'" />
               </template>
             </q-input>
           </div>
-          <div class="row q-mt-sm justify-center">
+          <div class="row q-mt-sm justify-end">
             <q-btn class="row q-mr-sm text-black" @click="goToSignup" color="grey-3" no-shadow>
               Sign Up
             </q-btn>
@@ -41,44 +40,64 @@
 
 
 <script>
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+import axios from 'axios';
+
 export default {
-  data() {
-    return {
-      isPasswordVisible: false,
-      form: {
-        username: {
-          value: '',
-          error: false,
-          msg: ''
-        },
-        password: {
-          value: '',
-          error: false,
-          msg: ''
+  setup() {
+    const router = useRouter()
+    const form = reactive({
+      username: { value: '', error: false, msg: '' },
+      password: { value: '', error: false, msg: '' }
+    })
+    const isPasswordVisible = ref(false)
+    const passwordFieldType = ref('password')
+
+    const togglePasswordVisibility = () => {
+      isPasswordVisible.value = !isPasswordVisible.value
+      passwordFieldType.value = isPasswordVisible.value ? 'text' : 'password'
+    }
+
+    const goToSignup = () => {
+        router.push('/signup');
+      }
+
+    const submitLogin = async () => {
+      try {
+        const response = await axios.post('http://localhost:8080/login', {
+          userName: form.username.value,
+          password: form.password.value
+        })
+
+        const { access_token, refresh_token } = response.data
+        localStorage.setItem('accessToken', access_token)
+        localStorage.setItem('refreshToken', refresh_token)
+
+        // Redirect to a protected route after successful login
+        router.push('/items')
+      } catch (error) {
+        if (error.response && error.response.data) {
+          form.username.error = true
+          form.username.msg = error.response.data.message || 'Login failed. Please try again.'
         }
       }
     }
-  },
-  computed: {
-    passwordFieldType() {
-      return this.isPasswordVisible ? 'text' : 'password';
-    }
-  },
-  methods: {
-    togglePasswordVisibility() {
-      this.isPasswordVisible = !this.isPasswordVisible;
-    },
-    goToSignup() {
-      this.$router.push('/signup');
-    },
-    submitLogin() {
-      console.log('Form data:', this.form);
-      // Add your login logic here
+
+    return {
+      form,
+      submitLogin,
+      togglePasswordVisibility,
+      goToSignup,
+      passwordFieldType,
+      isPasswordVisible
     }
   }
 }
-</script>
 
+
+</script>
 
 <style>
 .page-container {
